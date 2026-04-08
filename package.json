@@ -1,6 +1,6 @@
 {
   "name": "sakayori-web",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "scripts": {
     "dev": "next dev -p 3636",
@@ -13,9 +13,7 @@
   "dependencies": {
     "next": "^15.1.6",
     "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "lucide-react": "^0.469.0",
-    "framer-motion": "^11.15.0"
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
