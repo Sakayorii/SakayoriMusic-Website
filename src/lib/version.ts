@@ -1,4 +1,4 @@
-const FALLBACK_VERSION = "2.0.9"
+const FALLBACK_VERSION = "2.1.0"
 const GITHUB_API = "https://api.github.com/repos/Sakayorii/sakayori-music/releases/latest"
 
 let cache: Promise<string> | null = null
