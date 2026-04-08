@@ -1,0 +1,32 @@
+{
+  "name": "sakayori-web",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3636",
+    "build": "next build",
+    "start": "next start -p 3636",
+    "lint": "next lint",
+    "tunnel": "cloudflared tunnel run 1454acb3-4924-4e16-a3f1-a6354f46f995",
+    "dev:tunnel": "concurrently \"npm run dev\" \"cloudflared tunnel run 1454acb3-4924-4e16-a3f1-a6354f46f995\""
+  },
+  "dependencies": {
+    "next": "^15.1.6",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "lucide-react": "^0.469.0",
+    "framer-motion": "^11.15.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.7.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "postcss": "^8.4.0",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "^15.1.6",
+    "concurrently": "^9.1.0"
+  }
+}
