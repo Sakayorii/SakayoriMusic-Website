@@ -4,6 +4,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState } from "react"
+import { GithubIcon } from "@/components/Icons"
 
 const links = [
   { href: "/", label: "Home" },
@@ -57,10 +58,10 @@ export function Navbar() {
             href="https://github.com/Sakayorii/sakayori-music"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[13px] font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
+            className="inline-flex items-center gap-1.5 text-[13px] font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text)] transition-colors"
           >
+            <GithubIcon className="w-3.5 h-3.5" />
             GitHub
-            <span className="ml-1 font-mono">↗</span>
           </a>
           <Link
             href="/download"
@@ -106,8 +107,9 @@ export function Navbar() {
                 href="https://github.com/Sakayorii/sakayori-music"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block px-3 py-2.5 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5"
+                className="flex items-center gap-2 px-3 py-2.5 text-sm font-medium text-[var(--color-text-muted)] hover:text-[var(--color-text)] hover:bg-white/5"
               >
+                <GithubIcon className="w-3.5 h-3.5" />
                 GitHub
               </a>
             </li>

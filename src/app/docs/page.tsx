@@ -1,5 +1,7 @@
 import Link from "next/link"
 import { DocsSidebar } from "@/components/DocsSidebar"
+import { GithubIcon } from "@/components/Icons"
+import { DocsLinuxInstall } from "@/components/DocsLinuxInstall"
 
 export const metadata = {
   title: "Documentation — SakayoriMusic",
@@ -67,10 +69,7 @@ export default function DocsPage() {
                 </DocCard>
 
                 <DocCard title="Linux">
-                  <p className="text-sm text-[var(--color-text-muted)] mb-3">For Debian / Ubuntu:</p>
-                  <CodeBlock>sudo dpkg -i sakayorimusic_2.0.8_amd64.deb</CodeBlock>
-                  <p className="text-sm text-[var(--color-text-muted)] mt-4 mb-3">For Fedora / RHEL:</p>
-                  <CodeBlock>sudo rpm -i sakayorimusic-2.0.8.x86_64.rpm</CodeBlock>
+                  <DocsLinuxInstall />
                 </DocCard>
 
                 <DocCard title="macOS">
@@ -219,7 +218,8 @@ export default function DocsPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] text-[var(--color-bg)] px-5 py-2.5 font-medium text-sm transition-colors shrink-0"
                 >
-                  Open Issue <span className="font-mono">↗</span>
+                  <GithubIcon className="w-3.5 h-3.5" />
+                  Open Issue
                 </a>
               </div>
             </div>
@@ -266,16 +266,6 @@ function Inline({ children }: { children: React.ReactNode }) {
     <span className="font-mono text-[12px] text-[var(--color-text)] bg-[var(--color-bg-elevated)] border border-[var(--color-border)] px-1.5 py-0.5">
       {children}
     </span>
-  )
-}
-
-function CodeBlock({ children }: { children: React.ReactNode }) {
-  return (
-    <pre className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-4 text-xs font-mono text-[var(--color-text-soft)] overflow-x-auto">
-      <code>
-        <span className="text-[var(--color-accent)]">$</span> {children}
-      </code>
-    </pre>
   )
 }
 
