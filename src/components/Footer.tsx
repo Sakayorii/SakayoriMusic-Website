@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Link from "next/link"
+import { GithubIcon } from "@/components/Icons"
 
 export function Footer() {
   return (
@@ -58,9 +59,10 @@ export function Footer() {
                   href="https://github.com/Sakayorii/sakayori-music"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[var(--color-text)] transition-colors"
+                  className="inline-flex items-center gap-1.5 hover:text-[var(--color-text)] transition-colors"
                 >
-                  GitHub <span className="font-mono">↗</span>
+                  <GithubIcon className="w-3.5 h-3.5" />
+                  GitHub
                 </a>
               </li>
               <li>

@@ -103,6 +103,25 @@ body {
   }
 }
 
+.splash-bar {
+  display: inline-block;
+  width: 4px;
+  height: 12px;
+  background: var(--color-accent);
+  animation: splash-bar 0.9s ease-in-out infinite;
+}
+
+@keyframes splash-bar {
+  0%, 100% {
+    height: 12px;
+    opacity: 0.4;
+  }
+  50% {
+    height: 48px;
+    opacity: 1;
+  }
+}
+
 ::selection {
   background: var(--color-accent);
   color: var(--color-bg);

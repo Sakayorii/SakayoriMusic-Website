@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
+import { Splash } from "@/components/Splash"
 import "./globals.css"
 
 const inter = Inter({
@@ -70,6 +71,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${serif.variable} ${mono.variable}`}>
       <body className="min-h-screen flex flex-col antialiased">
+        <Splash />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />

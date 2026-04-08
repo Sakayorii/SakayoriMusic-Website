@@ -1,5 +1,8 @@
 import Link from "next/link"
 import { VersionBadge } from "@/components/VersionBadge"
+import { GithubIcon } from "@/components/Icons"
+import { InstallSnippet } from "@/components/InstallSnippet"
+import { StatsList } from "@/components/StatsList"
 
 const features = [
   {
@@ -91,6 +94,7 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2.5 surface surface-hover px-6 py-3.5 font-medium"
                 >
+                  <GithubIcon className="w-4 h-4" />
                   View Source
                   <span className="font-mono text-[var(--color-text-muted)]">↗</span>
                 </a>
@@ -98,13 +102,7 @@ export default function HomePage() {
             </div>
 
             <div className="lg:col-span-4">
-              <dl className="font-mono text-sm">
-                <Stat label="Version" value="2.0.8" />
-                <Stat label="Platforms" value="04" />
-                <Stat label="Audio" value="320kbps" />
-                <Stat label="License" value="MIT" />
-                <Stat label="Price" value="Free Forever" highlight />
-              </dl>
+              <StatsList />
             </div>
           </div>
 
@@ -181,36 +179,12 @@ export default function HomePage() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="surface overflow-hidden font-mono text-xs">
-                <div className="flex items-center gap-2 px-4 py-2.5 border-b border-[var(--color-border)] bg-[var(--color-bg-elevated)]">
-                  <span className="w-2.5 h-2.5 bg-[var(--color-text-faint)]" />
-                  <span className="w-2.5 h-2.5 bg-[var(--color-text-faint)]" />
-                  <span className="w-2.5 h-2.5 bg-[var(--color-text-faint)]" />
-                  <span className="ml-2 text-[var(--color-text-muted)]">~/sakayori — install</span>
-                </div>
-                <div className="p-5 space-y-3">
-                  <CodeRow comment="# Linux (Debian / Ubuntu)" command="sudo dpkg -i sakayorimusic_2.0.8_amd64.deb" />
-                  <CodeRow comment="# Linux (Fedora / RHEL)" command="sudo rpm -i sakayorimusic-2.0.8.x86_64.rpm" />
-                  <CodeRow comment="# Windows" command="msiexec /i SakayoriMusic-2.0.8.msi" />
-                  <CodeRow comment="# macOS — drag from .dmg" command="open SakayoriMusic-2.0.8-arm64.dmg" />
-                </div>
-              </div>
+              <InstallSnippet />
             </div>
           </div>
         </div>
       </section>
     </>
-  )
-}
-
-function Stat({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
-  return (
-    <div className="flex items-baseline justify-between py-3 border-b border-[var(--color-border)] last:border-b-0">
-      <dt className="text-[var(--color-text-muted)] text-xs uppercase tracking-wider">{label}</dt>
-      <dd className={highlight ? "text-[var(--color-accent)] font-semibold" : "text-[var(--color-text)]"}>
-        {value}
-      </dd>
-    </div>
   )
 }
 
@@ -234,17 +208,6 @@ function FeatureRow({ number, title, description, tag }: FeatureRowProps) {
         {title}
       </h3>
       <p className="text-sm text-[var(--color-text-muted)] leading-relaxed text-pretty">{description}</p>
-    </div>
-  )
-}
-
-function CodeRow({ comment, command }: { comment: string; command: string }) {
-  return (
-    <div>
-      <div className="text-[var(--color-text-faint)]">{comment}</div>
-      <div className="text-[var(--color-text-soft)]">
-        <span className="text-[var(--color-accent)]">$</span> {command}
-      </div>
     </div>
   )
 }
