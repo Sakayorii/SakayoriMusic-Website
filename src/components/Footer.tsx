@@ -1,34 +1,35 @@
 import Image from "next/image"
 import Link from "next/link"
-import { Github, Heart } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="border-t border-[var(--color-border)] mt-32">
-      <div className="container mx-auto px-6 py-12 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-          <div className="md:col-span-2">
-            <div className="flex items-center gap-3 mb-4">
+    <footer className="border-t border-[var(--color-border)] mt-24">
+      <div className="container mx-auto px-6 py-14 max-w-6xl">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+          <div className="col-span-2">
+            <div className="flex items-center gap-2.5 mb-4">
               <Image
                 src="/logo.svg"
-                alt="SakayoriMusic Logo"
-                width={36}
-                height={36}
-                className="rounded-xl"
+                alt="SakayoriMusic"
+                width={28}
+                height={28}
+                className="rounded-md"
               />
-              <span className="text-lg font-semibold">
+              <span className="text-[15px] font-semibold">
                 Sakayori<span className="text-[var(--color-accent)]">Music</span>
               </span>
             </div>
-            <p className="text-sm text-[var(--color-text-muted)] max-w-md leading-relaxed">
-              A free, open-source music streaming client. No ads, no tracking, no telemetry. Built with Kotlin
-              Multiplatform & Compose.
+            <p className="text-sm text-[var(--color-text-muted)] max-w-sm leading-relaxed">
+              A free, open-source music client. No ads, no tracking, no telemetry. Built with Kotlin
+              Multiplatform &amp; Compose.
             </p>
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold mb-4 text-[var(--color-text)]">Product</h3>
-            <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-faint)] mb-4">
+              Product
+            </h3>
+            <ul className="space-y-2.5 text-sm text-[var(--color-text-muted)]">
               <li>
                 <Link href="/" className="hover:text-[var(--color-text)] transition-colors">
                   Home
@@ -48,17 +49,18 @@ export function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold mb-4 text-[var(--color-text)]">Community</h3>
-            <ul className="space-y-2 text-sm text-[var(--color-text-muted)]">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-faint)] mb-4">
+              Community
+            </h3>
+            <ul className="space-y-2.5 text-sm text-[var(--color-text-muted)]">
               <li>
                 <a
                   href="https://github.com/Sakayorii/sakayori-music"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[var(--color-text)] transition-colors flex items-center gap-2"
+                  className="hover:text-[var(--color-text)] transition-colors"
                 >
-                  <Github className="w-3.5 h-3.5" />
-                  GitHub
+                  GitHub <span className="font-mono">↗</span>
                 </a>
               </li>
               <li>
@@ -78,19 +80,19 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-[var(--color-text)] transition-colors"
                 >
-                  Report a Bug
+                  Report Bug
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="pt-8 border-t border-[var(--color-border)] flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[var(--color-text-muted)]">
-            © 2026 Sakayori Studio. Licensed under MIT.
+        <div className="pt-8 border-t border-[var(--color-border)] flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+          <p className="font-mono text-[11px] text-[var(--color-text-faint)]">
+            © 2026 Sakayori Studio · MIT License
           </p>
-          <p className="text-xs text-[var(--color-text-muted)] flex items-center gap-1.5">
-            Made with <Heart className="w-3 h-3 text-[var(--color-accent)] fill-current" /> by Sakayori Studio
+          <p className="font-mono text-[11px] text-[var(--color-text-faint)]">
+            Crafted In Vietnam · Free Forever
           </p>
         </div>
       </div>

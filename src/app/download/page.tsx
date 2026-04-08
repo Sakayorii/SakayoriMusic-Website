@@ -7,47 +7,102 @@ export const metadata = {
 
 export default function DownloadPage() {
   return (
-    <div className="container mx-auto px-6 py-20 max-w-6xl">
-      <div className="text-center mb-16">
-        <div className="glass inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs text-[var(--color-text-muted)] mb-4 uppercase tracking-wider">
-          Download
+    <>
+      <section className="border-b border-[var(--color-border)]">
+        <div className="container mx-auto px-6 pt-20 pb-16 max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">
+            <div className="lg:col-span-8">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] mb-4">
+                / Downloads
+              </p>
+              <h1 className="text-5xl md:text-7xl font-semibold tracking-[-0.04em] leading-[0.95] mb-6 text-balance">
+                Get The{" "}
+                <span className="font-serif italic font-normal text-[var(--color-accent)]">
+                  Right Build
+                </span>
+                <br />
+                For Your Device.
+              </h1>
+              <p className="text-lg text-[var(--color-text-soft)] max-w-xl leading-relaxed text-pretty">
+                Direct downloads from GitHub Releases. Pick your platform — installation takes seconds.
+              </p>
+            </div>
+            <div className="lg:col-span-4">
+              <dl className="font-mono text-xs">
+                <div className="flex items-baseline justify-between py-2.5 border-b border-[var(--color-border)]">
+                  <dt className="text-[var(--color-text-muted)] uppercase tracking-wider">Source</dt>
+                  <dd className="text-[var(--color-text)]">GitHub Releases</dd>
+                </div>
+                <div className="flex items-baseline justify-between py-2.5 border-b border-[var(--color-border)]">
+                  <dt className="text-[var(--color-text-muted)] uppercase tracking-wider">Signing</dt>
+                  <dd className="text-[var(--color-text)]">SHA-256 Verified</dd>
+                </div>
+                <div className="flex items-baseline justify-between py-2.5">
+                  <dt className="text-[var(--color-text-muted)] uppercase tracking-wider">Mirrors</dt>
+                  <dd className="text-[var(--color-text)]">None — Direct Only</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
         </div>
-        <h1 className="text-5xl md:text-6xl font-bold mb-4 tracking-tight">
-          Get <span className="text-gradient">SakayoriMusic</span>
-        </h1>
-        <p className="text-lg text-[var(--color-text-muted)] max-w-2xl mx-auto">
-          Choose your platform below. All builds are free, open source, and signed by Sakayori Studio.
-        </p>
-      </div>
+      </section>
 
-      <DownloadGrid />
+      <section>
+        <div className="container mx-auto px-6 py-20 max-w-6xl">
+          <DownloadGrid />
 
-      <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="glass rounded-2xl p-6">
-          <h3 className="font-semibold mb-2">System Requirements</h3>
-          <ul className="text-sm text-[var(--color-text-muted)] space-y-1">
-            <li>• Android 8.0 (API 26) or higher</li>
-            <li>• Windows 10 / 11 (64-bit)</li>
-            <li>• Linux (Ubuntu 20.04+, Fedora 34+)</li>
-            <li>• macOS 11.0 (Big Sur) or higher</li>
-          </ul>
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <InfoCard title="System Requirements">
+              <ul className="space-y-1.5">
+                <li className="flex justify-between gap-2">
+                  <span>Android</span>
+                  <span className="text-[var(--color-text-soft)]">8.0+ (API 26)</span>
+                </li>
+                <li className="flex justify-between gap-2">
+                  <span>Windows</span>
+                  <span className="text-[var(--color-text-soft)]">10 / 11 (64-bit)</span>
+                </li>
+                <li className="flex justify-between gap-2">
+                  <span>Linux</span>
+                  <span className="text-[var(--color-text-soft)]">Ubuntu 20.04+</span>
+                </li>
+                <li className="flex justify-between gap-2">
+                  <span>macOS</span>
+                  <span className="text-[var(--color-text-soft)]">11.0 Big Sur+</span>
+                </li>
+              </ul>
+            </InfoCard>
+
+            <InfoCard title="Windows SmartScreen">
+              <p>
+                On first launch, click{" "}
+                <span className="text-[var(--color-text)]">More Info</span> →{" "}
+                <span className="text-[var(--color-text)]">Run Anyway</span>. The app is unsigned but
+                completely safe — verify on GitHub.
+              </p>
+            </InfoCard>
+
+            <InfoCard title="macOS Gatekeeper">
+              <p>
+                Open <span className="text-[var(--color-text)]">System Settings</span> →{" "}
+                <span className="text-[var(--color-text)]">Privacy &amp; Security</span> → click{" "}
+                <span className="text-[var(--color-text)]">Open Anyway</span>.
+              </p>
+            </InfoCard>
+          </div>
         </div>
-        <div className="glass rounded-2xl p-6">
-          <h3 className="font-semibold mb-2">Windows SmartScreen</h3>
-          <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-            On first launch, click <span className="text-[var(--color-text)]">More info</span> →{" "}
-            <span className="text-[var(--color-text)]">Run anyway</span>. The app is unsigned but safe.
-          </p>
-        </div>
-        <div className="glass rounded-2xl p-6">
-          <h3 className="font-semibold mb-2">macOS Gatekeeper</h3>
-          <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-            Open <span className="text-[var(--color-text)]">System Settings</span> →{" "}
-            <span className="text-[var(--color-text)]">Privacy & Security</span> → click{" "}
-            <span className="text-[var(--color-text)]">Open Anyway</span>.
-          </p>
-        </div>
-      </div>
+      </section>
+    </>
+  )
+}
+
+function InfoCard({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="surface p-5">
+      <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-3">
+        {title}
+      </h3>
+      <div className="text-sm text-[var(--color-text-muted)] leading-relaxed">{children}</div>
     </div>
   )
 }

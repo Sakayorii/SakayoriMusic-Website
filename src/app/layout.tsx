@@ -1,13 +1,31 @@
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import "./globals.css"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
+
+const serif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-serif",
+  display: "swap",
+})
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
-  title: "SakayoriMusic — Modern YouTube Music Client",
+  title: "SakayoriMusic — A Music App You Actually Own",
   description:
     "A free, open-source, cross-platform YouTube Music client built with Kotlin Multiplatform & Compose. Stream music on Android, Windows, Linux, and macOS without ads.",
   keywords: [
@@ -50,8 +68,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="min-h-screen flex flex-col">
+    <html lang="en" className={`${inter.variable} ${serif.variable} ${mono.variable}`}>
+      <body className="min-h-screen flex flex-col antialiased">
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
