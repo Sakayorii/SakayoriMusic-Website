@@ -1,9 +1,17 @@
 import { MediaCard } from "@/components/MediaCard"
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+const VIDEO_KEYWORDS = /(official\s*(video|mv|music\s*video)|music\s*video|\bMV\b|lyric\s*video|video\s*clip|live\s*performance|concert|visualizer)/i
+
+function detectVideo(title: string, queryType?: string): boolean {
+  if (queryType === "video") return true
+  return VIDEO_KEYWORDS.test(title)
+}
+
+export async function generateMetadata({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ type?: string }> }) {
   const { id } = await params
+  const { type } = await searchParams
   let title = `Play ${id}`
-  let description = "Listen on SakayoriMusic"
+  let isVideo = type === "video"
 
   try {
     const res = await fetch(
@@ -12,46 +20,61 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     )
     if (res.ok) {
       const data = await res.json()
-      if (data.title) title = data.title
-      if (data.author_name) description = `${data.author_name} — Listen on SakayoriMusic`
+      if (data.title) {
+        title = data.title
+        isVideo = detectVideo(data.title, type)
+      }
     }
   } catch {}
 
+  const verb = isVideo ? "Watch" : "Listen"
   return {
     title: `${title} — SakayoriMusic`,
-    description,
+    description: `${verb} on SakayoriMusic`,
     openGraph: {
       title,
-      description,
+      description: `${verb} on SakayoriMusic`,
       images: [`https://i.ytimg.com/vi/${id}/hqdefault.jpg`],
     },
   }
 }
 
-export default async function PlayPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function PlayPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ type?: string }> }) {
   const { id } = await params
+  const { type } = await searchParams
+  let isVideo = type === "video"
+  try {
+    const res = await fetch(
+      `https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=${id}&format=json`,
+      { next: { revalidate: 3600 } },
+    )
+    if (res.ok) {
+      const data = await res.json()
+      if (data.title) isVideo = detectVideo(data.title, type)
+    }
+  } catch {}
   return (
     <>
       <section className="border-b border-[var(--color-border)]">
         <div className="container mx-auto px-6 pt-20 pb-16 max-w-6xl">
           <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] mb-4">
-            / Now Playing
+            / {isVideo ? "Now Watching" : "Now Playing"}
           </p>
           <h1 className="text-4xl md:text-5xl font-semibold tracking-[-0.03em] leading-[1] mb-6 text-balance">
-            Listen On{" "}
+            {isVideo ? "Watch" : "Listen"} On{" "}
             <span className="font-serif italic font-normal text-[var(--color-accent)]">
               SakayoriMusic
             </span>
           </h1>
           <p className="text-base text-[var(--color-text-soft)] max-w-xl leading-relaxed text-pretty">
-            This track is available on SakayoriMusic. Tap the button below to open it in the app.
+            This {isVideo ? "video" : "track"} is available on SakayoriMusic. Tap the button below to open it in the app.
           </p>
         </div>
       </section>
 
       <section>
         <div className="container mx-auto px-6 py-16 max-w-6xl">
-          <MediaCard id={id} type="play" />
+          <MediaCard id={id} type="play" isVideo={isVideo} />
 
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
             <InfoCard title="Don't Have The App?">
@@ -73,9 +96,9 @@ export default async function PlayPage({ params }: { params: Promise<{ id: strin
                 <li>macOS 11+</li>
               </ul>
             </InfoCard>
-            <InfoCard title="Share This Track">
+            <InfoCard title="Share This">
               <p className="font-mono text-[11px] text-[var(--color-text-soft)] break-all select-all">
-                music.sakayori.dev/play/{id}
+                music.sakayori.dev/play/{id}{isVideo ? "?type=video" : ""}
               </p>
             </InfoCard>
           </div>

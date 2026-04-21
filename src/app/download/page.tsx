@@ -34,7 +34,7 @@ export default function DownloadPage() {
                   <dd className="text-[var(--color-text)]">GitHub Releases</dd>
                 </div>
                 <div className="flex items-baseline justify-between py-2.5 border-b border-[var(--color-border)]">
-                  <dt className="text-[var(--color-text-muted)] uppercase tracking-wider">Signing</dt>
+                  <dt className="text-[var(--color-text-muted)] uppercase tracking-wider">Integrity</dt>
                   <dd className="text-[var(--color-text)]">SHA-256 Verified</dd>
                 </div>
                 <div className="flex items-baseline justify-between py-2.5">
@@ -51,7 +51,26 @@ export default function DownloadPage() {
         <div className="container mx-auto px-6 py-20 max-w-6xl">
           <DownloadGrid />
 
-          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="mt-16 surface p-6 border-l-2 border-l-[var(--color-accent)]">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-2">
+              Important
+            </h3>
+            <h4 className="text-lg font-semibold mb-3">Windows Defender May Delete The App</h4>
+            <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
+              SakayoriMusic is unsigned open-source software. Windows Defender may remove the app after a reboot because it does not recognize the executable. This is a false positive — the app is completely safe and you can verify the source code on GitHub.
+            </p>
+            <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
+              To fix this permanently, open <span className="text-[var(--color-text)]">PowerShell as Administrator</span> and run:
+            </p>
+            <pre className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-4 text-xs font-mono text-[var(--color-text-soft)] overflow-x-auto mb-3">
+              <code><span className="text-[var(--color-accent)]">$</span> Add-MpExclusion -Path &quot;C:\Program Files\SakayoriMusic&quot;</code>
+            </pre>
+            <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+              This tells Defender to stop scanning the install folder. You only need to do this once.
+            </p>
+          </div>
+
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
             <InfoCard title="System Requirements">
               <ul className="space-y-1.5">
                 <li className="flex justify-between gap-2">
@@ -89,6 +108,31 @@ export default function DownloadPage() {
                 <span className="text-[var(--color-text)]">Open Anyway</span>.
               </p>
             </InfoCard>
+          </div>
+
+          <div className="mt-10 surface p-6">
+            <h3 className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-4">
+              Desktop Shortcuts
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 text-xs font-mono">
+              {[
+                ["Space", "Play / Pause"],
+                ["← →", "Prev / Next"],
+                ["↑ ↓", "Volume"],
+                ["M", "Mute"],
+                ["L", "Like"],
+                ["S", "Shuffle"],
+                ["R", "Repeat"],
+                ["?", "Show All"],
+              ].map(([key, action]) => (
+                <div key={key} className="flex items-center gap-2">
+                  <kbd className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] px-2 py-1 text-[var(--color-text)]">
+                    {key}
+                  </kbd>
+                  <span className="text-[var(--color-text-muted)]">{action}</span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

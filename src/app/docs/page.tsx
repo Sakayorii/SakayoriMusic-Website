@@ -2,6 +2,7 @@ import Link from "next/link"
 import { DocsSidebar } from "@/components/DocsSidebar"
 import { GithubIcon } from "@/components/Icons"
 import { DocsLinuxInstall } from "@/components/DocsLinuxInstall"
+import { LyricsStatsCards } from "@/components/LyricsStats"
 
 export const metadata = {
   title: "Documentation — SakayoriMusic",
@@ -65,6 +66,12 @@ export default function DocsPage() {
                     </li>
                     <li>Follow the setup wizard and choose your installation directory.</li>
                     <li>Launch SakayoriMusic from the Start menu or desktop shortcut.</li>
+                    <li>
+                      <span className="text-[var(--color-accent)] font-semibold">Important:</span>{" "}
+                      Windows Defender may delete the app after reboot. Open PowerShell as Admin and run:{" "}
+                      <Inline>Add-MpExclusion -Path &quot;C:\Program Files\SakayoriMusic&quot;</Inline>{" "}
+                      — this only needs to be done once.
+                    </li>
                   </ol>
                 </DocCard>
 
@@ -141,10 +148,13 @@ export default function DocsPage() {
                 </DocCard>
 
                 <DocCard title="Discord Rich Presence">
-                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
-                    Show your friends what you&apos;re listening to in real time. Enable in{" "}
-                    <Inline>Settings → Integrations → Discord</Inline>.
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    Show your friends what you&apos;re listening to in real time.
                   </p>
+                  <ul className="text-sm text-[var(--color-text-muted)] space-y-1 list-disc list-inside leading-relaxed">
+                    <li><strong>Desktop:</strong> Automatic — just toggle in <Inline>Settings → Discord → Enable Rich Presence</Inline>. Connects directly to Discord app via local IPC, no login needed.</li>
+                    <li><strong>Mobile:</strong> Requires Discord login in <Inline>Settings → Discord → Log In To Discord</Inline>.</li>
+                  </ul>
                 </DocCard>
 
                 <DocCard title="Liquid Glass UI">
@@ -165,7 +175,153 @@ export default function DocsPage() {
                 </DocCard>
               </DocSection>
 
-              <DocSection id="faq" number="04" title="FAQ">
+              <DocSection id="shortcuts" number="04" title="Keyboard Shortcuts (Desktop)">
+                <DocCard title="Playback">
+                  <ShortcutTable shortcuts={[
+                    ["Space", "Play / Pause"],
+                    ["→ (Right Arrow)", "Skip To Next Track"],
+                    ["← (Left Arrow)", "Previous Track"],
+                    ["↑ (Up Arrow)", "Volume Up"],
+                    ["↓ (Down Arrow)", "Volume Down"],
+                    ["M", "Mute / Unmute"],
+                    ["S", "Toggle Shuffle"],
+                    ["R", "Cycle Repeat Mode"],
+                    ["L", "Like / Unlike Current Track"],
+                  ]} />
+                </DocCard>
+
+                <DocCard title="Media Keys">
+                  <ShortcutTable shortcuts={[
+                    ["Media Play/Pause", "Play / Pause"],
+                    ["Media Next", "Next Track"],
+                    ["Media Previous", "Previous Track"],
+                  ]} />
+                  <p className="text-xs text-[var(--color-text-muted)] mt-3 leading-relaxed">
+                    Hardware media keys (on keyboards, headphones, etc.) are automatically mapped
+                    to playback controls.
+                  </p>
+                </DocCard>
+              </DocSection>
+
+              <DocSection id="auto-update" number="05" title="Auto Update System">
+                <DocCard title="Manual Update">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                    When a new version is released, an update dialog appears with a{" "}
+                    <Inline>Download</Inline> button. Click it — a progress bar replaces the
+                    buttons and downloads the installer matching your platform and CPU
+                    architecture automatically.
+                  </p>
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mt-2">
+                    Once complete, click <Inline>Install</Inline>. The app closes, installer
+                    runs silently, then relaunches with the new version.
+                  </p>
+                </DocCard>
+
+                <DocCard title="Auto Update On Restart">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    Enable in <Inline>Settings → Update Channel → Auto Update On Restart</Inline>.
+                    The app downloads new versions in the background while you use it. The
+                    next time you restart, the new version installs automatically.
+                  </p>
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                    Partial downloads from interrupted sessions are cleaned up automatically on
+                    the next launch. User data (playlists, settings, downloads) is always
+                    preserved across updates.
+                  </p>
+                </DocCard>
+
+                <DocCard title="Per-Platform Install Behavior">
+                  <ul className="text-sm text-[var(--color-text-muted)] space-y-2 list-disc list-inside leading-relaxed">
+                    <li><strong>Windows:</strong> MSI installs per-user to{" "}
+                      <Inline>%LOCALAPPDATA%\Programs\SakayoriMusic</Inline> — no UAC prompt,
+                      no admin required. Upgrades replace old version cleanly.
+                    </li>
+                    <li><strong>Android:</strong> Auto-detects ABI (arm64-v8a, armeabi-v7a,
+                      x86_64) and downloads the matching APK. Requires{" "}
+                      <Inline>Install Unknown Apps</Inline> permission.
+                    </li>
+                    <li><strong>Linux:</strong> Detects distro family — DEB on
+                      Debian/Ubuntu, RPM on Fedora/RHEL. Installs via{" "}
+                      <Inline>pkexec</Inline> with polkit prompt.
+                    </li>
+                    <li><strong>macOS:</strong> DMG download. Drag to Applications manually.</li>
+                  </ul>
+                </DocCard>
+              </DocSection>
+
+              <DocSection id="lyrics-api" number="06" title="Lyrics API">
+                <DocCard title="SakayoriMusic Lyrics Server">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-3">
+                    A self-hosted community lyrics provider at{" "}
+                    <Inline>lyrics.sakayori.dev</Inline>. Contributes back to the app&apos;s
+                    word-by-word rich-sync lyrics display.
+                  </p>
+                  <LyricsStatsCards />
+                  <p className="text-xs text-[var(--color-text-muted)] leading-relaxed">
+                    Growing daily as users submit. Anonymous lookup by videoId — no user
+                    identifier, no tracking. Code open at{" "}
+                    <a href="https://github.com/Sakayorii/sakayori-lyrics" target="_blank" rel="noopener noreferrer" className="text-[var(--color-accent)] hover:underline">github.com/Sakayorii/sakayori-lyrics</a>.
+                  </p>
+                </DocCard>
+
+                <DocCard title="Fallback Providers">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    If the SakayoriMusic server doesn&apos;t have a match, the app falls back
+                    to:
+                  </p>
+                  <ul className="text-sm text-[var(--color-text-muted)] space-y-1 list-disc list-inside leading-relaxed">
+                    <li><strong>YouTube Transcript</strong> — captions from the video itself</li>
+                    <li><strong>LRCLIB</strong> — community-maintained LRC database</li>
+                    <li><strong>BetterLyrics</strong> — scraped from YouTube Music web UI</li>
+                  </ul>
+                  <p className="text-xs text-[var(--color-text-muted)] mt-2 leading-relaxed">
+                    Change order of preference in{" "}
+                    <Inline>Settings → Content → Main Lyrics Provider</Inline>.
+                  </p>
+                </DocCard>
+              </DocSection>
+
+              <DocSection id="troubleshoot" number="07" title="Troubleshooting">
+                <DocCard title="Streaming Fails With STREAM_EXTRACT_FAILED">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    Usually caused by YouTube IP throttling (bot detection). Check:
+                  </p>
+                  <ul className="text-sm text-[var(--color-text-muted)] space-y-1 list-disc list-inside leading-relaxed">
+                    <li>Are you on a datacenter / cloud VPN IP? YouTube blocks these. Switch to residential internet or a VPN with residential exit nodes.</li>
+                    <li>Try signing in to YouTube in{" "}
+                      <Inline>Settings → Content → YouTube Account</Inline>. Logged-in requests have much lower throttling.</li>
+                    <li>The video may be age-restricted, region-locked, or deleted.</li>
+                  </ul>
+                </DocCard>
+
+                <DocCard title="App Freezes On First Launch">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                    Cold starts after a fresh install or cache clear can take up to 5 seconds
+                    as the database initializes. If it persists longer, force-stop the app
+                    from system settings and relaunch.
+                  </p>
+                </DocCard>
+
+                <DocCard title="Windows Defender Deletes The Executable">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed mb-2">
+                    Defender sometimes removes unsigned apps after reboot. Whitelist the
+                    install folder once:
+                  </p>
+                  <pre className="bg-[var(--color-bg-elevated)] border border-[var(--color-border)] p-3 text-xs font-mono text-[var(--color-text-soft)] overflow-x-auto">
+                    <code><span className="text-[var(--color-accent)]">$</span> Add-MpExclusion -Path &quot;$env:LOCALAPPDATA\Programs\SakayoriMusic&quot;</code>
+                  </pre>
+                </DocCard>
+
+                <DocCard title="Lyrics Don&apos;t Show">
+                  <p className="text-sm text-[var(--color-text-muted)] leading-relaxed">
+                    Not every track has synced lyrics. Try different providers in{" "}
+                    <Inline>Settings → Content → Main Lyrics Provider</Inline>. You can also
+                    submit lyrics to improve coverage — contribution guide on the lyrics repo.
+                  </p>
+                </DocCard>
+              </DocSection>
+
+              <DocSection id="faq" number="08" title="FAQ">
                 <FaqItem question="Is SakayoriMusic Free?">
                   Yes, completely free and open source under the MIT License. No subscription, no
                   premium tier, no in-app purchases.
@@ -175,13 +331,13 @@ export default function DocsPage() {
                   access but is optional.
                 </FaqItem>
                 <FaqItem question="Why Does Windows Show A Security Warning?">
-                  The app is not signed with an Extended Validation certificate (which costs $300+ a
-                  year). This is normal for free open-source apps. You can verify the source on
-                  GitHub.
+                  The app is not currently signed with an Extended Validation certificate. This is
+                  normal for free open-source apps. Click More Info → Run Anyway to proceed. You
+                  can always verify the source code on GitHub.
                 </FaqItem>
                 <FaqItem question="Does It Collect Any Data?">
                   No tracking, no analytics, no telemetry. Crash reports are opt-in via Sentry
-                  (disabled by default in FOSS builds). Your data stays on your device.
+                  (disabled by default). Your data stays on your device.
                 </FaqItem>
                 <FaqItem question="Can I Use It On iOS?">
                   iOS support is not currently available. Apple&apos;s licensing requirements make
@@ -261,11 +417,41 @@ function DocCard({ title, children }: { title: string; children: React.ReactNode
   )
 }
 
+function StatMini({ label, value, highlight }: { label: string; value: string; highlight?: boolean }) {
+  return (
+    <div className="border border-[var(--color-border)] p-3">
+      <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--color-text-faint)] mb-1">{label}</div>
+      <div className={highlight ? "text-[var(--color-accent)] font-semibold text-base font-mono" : "text-[var(--color-text)] text-base font-mono"}>
+        {value}
+      </div>
+    </div>
+  )
+}
+
 function Inline({ children }: { children: React.ReactNode }) {
   return (
     <span className="font-mono text-[12px] text-[var(--color-text)] bg-[var(--color-bg-elevated)] border border-[var(--color-border)] px-1.5 py-0.5">
       {children}
     </span>
+  )
+}
+
+function ShortcutTable({ shortcuts }: { shortcuts: [string, string][] }) {
+  return (
+    <table className="w-full text-sm">
+      <tbody>
+        {shortcuts.map(([key, action], i) => (
+          <tr key={i} className="border-b border-[var(--color-border)] last:border-0">
+            <td className="py-2 pr-4 w-1/3">
+              <kbd className="font-mono text-xs bg-[var(--color-bg-elevated)] border border-[var(--color-border)] px-2 py-1 rounded">
+                {key}
+              </kbd>
+            </td>
+            <td className="py-2 text-[var(--color-text-muted)]">{action}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
   )
 }
 

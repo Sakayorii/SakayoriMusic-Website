@@ -12,9 +12,10 @@ type MediaInfo = {
 type MediaCardProps = {
   id: string
   type: "play" | "playlist"
+  isVideo?: boolean
 }
 
-export function MediaCard({ id, type }: MediaCardProps) {
+export function MediaCard({ id, type, isVideo = false }: MediaCardProps) {
   const [info, setInfo] = useState<MediaInfo | null>(null)
   const [loading, setLoading] = useState(true)
   const [deepLinkFailed, setDeepLinkFailed] = useState(false)
@@ -116,7 +117,7 @@ export function MediaCard({ id, type }: MediaCardProps) {
               className="rounded-sm"
             />
             <span>
-              Open On{" "}
+              {isVideo ? "Watch" : "Listen"} On{" "}
               <span className="font-semibold">SakayoriMusic</span>
             </span>
             <span className="font-mono opacity-60 group-hover:opacity-100 transition-opacity">→</span>

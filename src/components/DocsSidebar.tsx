@@ -6,7 +6,11 @@ const sections = [
   { id: "installation", number: "01", label: "Installation" },
   { id: "setup", number: "02", label: "Setup & Config" },
   { id: "features", number: "03", label: "Features Guide" },
-  { id: "faq", number: "04", label: "FAQ" },
+  { id: "shortcuts", number: "04", label: "Keyboard Shortcuts" },
+  { id: "auto-update", number: "05", label: "Auto Update" },
+  { id: "lyrics-api", number: "06", label: "Lyrics API" },
+  { id: "troubleshoot", number: "07", label: "Troubleshooting" },
+  { id: "faq", number: "08", label: "FAQ" },
 ]
 
 export function DocsSidebar() {

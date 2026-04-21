@@ -184,6 +184,43 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <section className="border-b border-[var(--color-border)]">
+        <div className="container mx-auto px-6 py-20 max-w-6xl">
+          <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--color-accent)] mb-4">
+            / Languages
+          </p>
+          <h2 className="text-4xl md:text-5xl font-semibold tracking-[-0.03em] mb-6 max-w-2xl">
+            Speak{" "}
+            <span className="font-serif italic font-normal text-[var(--color-accent)]">
+              31 Languages
+            </span>
+            <br />
+            Including 5 Meme Ones.
+          </h2>
+          <p className="text-base text-[var(--color-text-soft)] max-w-xl mb-10 leading-relaxed">
+            From English to Japanese, Korean, Swedish, Czech — plus Pirate Speak, LOLCAT, Doge, UwU, and 1337. Because why not.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3 text-sm">
+            {[
+              "English", "Tiếng Việt", "日本語", "한국어", "简体中文", "繁體中文",
+              "Français", "Deutsch", "Español", "Italiano", "Português", "Русский",
+              "Polski", "Svenska", "Čeština", "Magyar", "Ελληνικά", "Română",
+              "ภาษาไทย", "Bahasa", "हिन्दी", "العربية", "עברית", "Türkçe",
+              "Nederlands", "Català", "فارسی", "Azərbaycanca", "Українська", "български",
+              "Suomi",
+              "🏴‍☠️ Pirate", "🐱 LOLCAT", "🦴 Doge", "🌸 UwU", "1337 5p34k",
+            ].map((lang) => (
+              <div
+                key={lang}
+                className="font-mono text-xs text-[var(--color-text-muted)] border border-[var(--color-border)] px-3 py-2 hover:text-[var(--color-text)] hover:border-[var(--color-accent)] transition-colors"
+              >
+                {lang}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </>
   )
 }

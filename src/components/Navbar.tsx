@@ -10,6 +10,9 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/download", label: "Download" },
   { href: "/docs", label: "Docs" },
+  { href: "/changelog", label: "Changelog" },
+  { href: "/roadmap", label: "Roadmap" },
+  { href: "/status", label: "Status" },
 ]
 
 export function Navbar() {
